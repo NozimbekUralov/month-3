@@ -24,14 +24,15 @@
                 <div class="modal-body">
                     <form class="form js-form col-md-12 center-block">
                         <div class="form-group">
-                            <input class="form-control input-lg" name="file" type="file" hidden>
+                            <input class="form-control input-lg" name="file" type="file" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control input-lg" name="username" placeholder="Username">
+                            <input type="text" class="form-control input-lg" required name="username"
+                                placeholder="Username">
                         </div>
                         <div class="form-group">
-                            <input type="password" name="password" class="form-control input-lg" placeholder="Password">
-                            <span id="errorMessage" style="color: red;" hidden>Wrong username or password!</span>
+                            <input type="password" name="password" required class="form-control input-lg"
+                                placeholder="Password">
                         </div>
                         <div class="form-group">
                             <button class="btn btn-primary btn-lg btn-block">Sign Up</button>
@@ -44,11 +45,8 @@
             </div>
         </div>
     </div>
-
-
-    <script type="text/javascript">
-
-    </script>
+    <script src="/js/base.js"></script>
+    <script src="/js/register.js"></script>
 </body>
 
 </html>
