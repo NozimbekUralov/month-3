@@ -1,7 +1,7 @@
 const USER = 'user';
 const TOKEN = 'token';
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://month-3.onrender.com/api';
 
 const authHeader = {
     headers: {
