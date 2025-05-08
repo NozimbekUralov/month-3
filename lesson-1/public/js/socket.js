@@ -1,7 +1,7 @@
 const initSocket = () => {
     const token = localStorage.getItem(TOKEN);
     if (!token) return null;
-    const socket = io("http://month-3.onrender.com", {
+    const socket = io("https://month-3.onrender.com", {
         auth: {
             token: `Bearer ${token}`
         }
