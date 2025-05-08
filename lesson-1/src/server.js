@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const { createServer } = require('node:http');
 const { Server } = require('socket.io');
+const cors = require('cors');
 
 const app = express();
 const { PORT } = require('./lib/config')
@@ -14,6 +15,7 @@ const ee = require('./lib/events');
 app.set('view engine', 'ejs');
 app.set('views', process.cwd() + '/src/views');
 
+app.use(cors());
 app.use('/api', mainRouter);
 app.use(viewsRouter);
 
