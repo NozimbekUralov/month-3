@@ -22,7 +22,7 @@ app.use(viewsRouter);
 app.use(express.static(path.join(process.cwd(), 'public')));
 
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, { cors: { origin: '*' } });
 
 const onlineUsers = new Map();
 
