@@ -2,7 +2,7 @@ DELETE TABLE IF EXISTS students;
 
 DELETE TABLE IF EXISTS teachers;
 
-DELETE TABLE IF EXISTS groups;
+DELETE TABLE IF EXISTS "groups";
 
 DELETE TABLE IF EXISTS student_group_map;
 
