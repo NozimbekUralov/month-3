@@ -1,0 +1,49 @@
+DROP TABLE IF EXISTS cars;
+
+DROP TABLE IF EXISTS brands;
+
+DROP TABLE IF EXISTS users;
+
+DROP TABLE IF EXISTS roles;
+
+DROP TABLE IF EXISTS "logs";
+
+CREATE TABLE IF NOT EXISTS brands (
+    id INT AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS cars (
+    id INT AUTO_INCREMENT,
+    model VARCHAR(50) NOT NULL,
+    brand INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (brand) REFERENCES brands (id)
+);
+
+CREATE TABLE IF NOT EXISTS roles (
+    id INT AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
+    role INT NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    FOREIGN KEY (role) REFERENCES roles (id)
+);
+
+CREATE TABLE IF NOT EXISTS logs (
+    id INT AUTO_INCREMENT,
+    action VARCHAR(50) NOT NULL,
+    table_name VARCHAR(50) NOT NULL,
+    executer INT NOT NULL,
+    applied INT NOT NULL,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    FOREIGN KEY (executer) REFERENCES users (id)
+);
