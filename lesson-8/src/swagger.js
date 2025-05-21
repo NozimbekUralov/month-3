@@ -5,6 +5,7 @@ const getSwagger = (name) => {
 }
 
 const roleSwagger = getSwagger('roles');
+const brandSwagger = getSwagger('brands');
 
 const swaggerDocument = {
     openapi: "3.0.0",
@@ -16,11 +17,13 @@ const swaggerDocument = {
         },
     },
     paths: {
-        ...roleSwagger.paths
+        ...roleSwagger.paths,
+        ...brandSwagger.paths
     },
     components: {
         schemas: {
-            ...roleSwagger.components.schemas
+            ...roleSwagger.components.schemas,
+            ...brandSwagger.components.schemas
         }
     }
 };

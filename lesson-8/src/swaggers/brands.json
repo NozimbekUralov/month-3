@@ -1,0 +1,337 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Brands API",
+        "version": "1.0.0"
+    },
+    "tags": [
+        {
+            "name": "Brands",
+            "description": "Brands management"
+        }
+    ],
+    "paths": {
+        "/api/brand": {
+            "post": {
+                "tags": [
+                    "Brands"
+                ],
+                "summary": "Create a new brand",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BrandInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Brand created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BrandCreatedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Brand already exists"
+                    }
+                }
+            }
+        },
+        "/api/brand/all": {
+            "get": {
+                "tags": [
+                    "Brands"
+                ],
+                "summary": "Get all brands",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 10
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of brands",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BrandListResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/brand/{id}": {
+            "get": {
+                "tags": [
+                    "Brands"
+                ],
+                "summary": "Get brand by ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Brand found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BrandResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Brand not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Brands"
+                ],
+                "summary": "Update brand by ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BrandInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Brand updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BrandUpdatedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Brand already exists"
+                    },
+                    "404": {
+                        "description": "Brand not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Brands"
+                ],
+                "summary": "Delete brand by ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Brand deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BrandDeletedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Brand not found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Brand": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Apple"
+                    }
+                }
+            },
+            "BrandInput": {
+                "type": "object",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Apple"
+                    }
+                }
+            },
+            "BrandCreatedResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "created"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "example": 201
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "result": {
+                                "type": "integer",
+                                "example": 1
+                            }
+                        }
+                    }
+                }
+            },
+            "BrandUpdatedResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "updated"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "example": 200
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "result": {
+                                "type": "integer",
+                                "example": 1
+                            }
+                        }
+                    }
+                }
+            },
+            "BrandDeletedResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "deleted"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "example": 200
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "result": {
+                                "type": "integer",
+                                "example": 1
+                            }
+                        }
+                    }
+                }
+            },
+            "BrandResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "ok"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "example": 200
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "result": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Brand"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "BrandListResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "ok"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "example": 200
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "result": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Brand"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
