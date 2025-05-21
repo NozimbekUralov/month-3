@@ -2,13 +2,13 @@ const mysql = require('mysql2/promise');
 const { DB_HOST, DB_USER, DB_PORT, DB_DATABASE, DB_PASSWORD } = require('./config');
 
 class DB {
-    #conn
+    _conn
     constructor() {
         this.init = this.init.bind(this);
     }
 
     async init(tables = [{}]) {
-        this.#conn = await mysql.createConnection({
+        this._conn = await mysql.createConnection({
             host: DB_HOST,
             user: DB_USER,
             port: DB_PORT,
@@ -16,9 +16,9 @@ class DB {
             password: DB_PASSWORD
         });
 
-        await this.#conn.connect();
+        await this._conn.connect();
 
-        const [dbTables] = await this.#conn.query('show tables');
+        const [dbTables] = await this._conn.query('show tables');
         const dbTablesNames = dbTables.map(table => Object.values(table)[0]);
         const exec = tables.map(table => (
             {
@@ -28,7 +28,7 @@ class DB {
         ))
         if (tables.length && !exec.every(table => table.exists == true)) {
             for (let i = 0; i < exec.length; i++) {
-                if (!exec[i].exists) await this.#conn.query(Object.values(tables[i])[0]);
+                if (!exec[i].exists) await this._conn.query(Object.values(tables[i])[0]);
             }
         }
     }
