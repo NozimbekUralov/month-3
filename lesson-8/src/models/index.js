@@ -1,5 +1,3 @@
-const { } = require('../lib/index')
-
 const brands = `
 CREATE TABLE IF NOT EXISTS brands (
     id INT AUTO_INCREMENT PRIMARY KEY,
