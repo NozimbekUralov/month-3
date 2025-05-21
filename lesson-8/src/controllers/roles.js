@@ -24,7 +24,7 @@ class RolesController {
     async GET_ALL(req, res) {
         try {
             const query = req.query;
-            const result = await this.#service.getAll({ page: query.page || 1, limit: query.limit || 10 });
+            const result = await this.#service.getAll({ page: +query.page || 1, limit: +query.limit || 10 });
             resHandler(new ResObj("ok", 200, { result }), res)
         } catch (err) {
             console.log(err);
