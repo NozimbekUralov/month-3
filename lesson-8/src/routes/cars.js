@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
 /**@param {import("../controllers/cars")} carsController*/
-module.exports = function (carsController) {
+function carsController(carsController) {
     const router = Router();
     router.post("/", carsController.CREATE)
     router.get("/all", carsController.GET_ALL)
@@ -11,3 +11,5 @@ module.exports = function (carsController) {
         .put(carsController.UPDATE)
     return router
 }
+
+module.exports = carsController;
