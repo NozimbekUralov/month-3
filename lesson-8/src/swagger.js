@@ -8,6 +8,7 @@ const roleSwagger = getSwagger('roles');
 const brandSwagger = getSwagger('brands');
 const carSwagger = getSwagger('cars');
 const userSagger = getSwagger('users');
+const orderSwagger = getSwagger('book_orders');
 
 const swaggerDocument = {
     openapi: "3.0.0",
@@ -22,14 +23,16 @@ const swaggerDocument = {
         ...roleSwagger.paths,
         ...brandSwagger.paths,
         ...carSwagger.paths,
-        ...userSagger.paths
+        ...userSagger.paths,
+        ...orderSwagger.paths
     },
     components: {
         schemas: {
             ...roleSwagger.components.schemas,
             ...brandSwagger.components.schemas,
             ...carSwagger.components.schemas,
-            ...userSagger.components.schemas
+            ...userSagger.components.schemas,
+            ...orderSwagger.components.schemas
         }
     }
 };

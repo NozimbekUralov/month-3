@@ -44,7 +44,7 @@ const controllers = () => {
     } = services();
     const carsController = new CarsController(carsService, brandsService);
     const brandsController = new BrandsController(brandsService);
-    const ordersController = new OrdersController(ordersService);
+    const ordersController = new OrdersController(ordersService, carsService, usersService);
     const rolesController = new RolesController(rolesService);
     const usersController = new UsersController(usersService, rolesService);
     return {

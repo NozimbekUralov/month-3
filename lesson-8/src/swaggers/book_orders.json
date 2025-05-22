@@ -1,0 +1,223 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Book Orders API",
+        "version": "1.0.0"
+    },
+    "tags": [
+        {
+            "name": "BookOrders",
+            "description": "Book orders management"
+        }
+    ],
+    "paths": {
+        "/api/order": {
+            "post": {
+                "tags": [
+                    "BookOrders"
+                ],
+                "summary": "Create a new book order",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BookOrderInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Book order created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BookOrderCreatedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "User or Car not found"
+                    }
+                }
+            }
+        },
+        "/api/order/all": {
+            "get": {
+                "tags": [
+                    "BookOrders"
+                ],
+                "summary": "Get all book orders",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 10
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of book orders",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BookOrderListResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/order/{id}": {
+            "get": {
+                "tags": [
+                    "BookOrders"
+                ],
+                "summary": "Get book order by ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Book order found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BookOrderResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Order not found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BookOrder": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "user": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "car": {
+                        "type": "integer",
+                        "example": 3
+                    }
+                }
+            },
+            "BookOrderInput": {
+                "type": "object",
+                "required": [
+                    "user",
+                    "car"
+                ],
+                "properties": {
+                    "user": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "car": {
+                        "type": "integer",
+                        "example": 3
+                    }
+                }
+            },
+            "BookOrderCreatedResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "created"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "example": 201
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "order": {
+                                "$ref": "#/components/schemas/BookOrder"
+                            }
+                        }
+                    }
+                }
+            },
+            "BookOrderResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "ok"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "example": 200
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "order": {
+                                "$ref": "#/components/schemas/BookOrder"
+                            }
+                        }
+                    }
+                }
+            },
+            "BookOrderListResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "ok"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "example": 200
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "orders": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/BookOrder"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
