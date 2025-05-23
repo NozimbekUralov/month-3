@@ -1,0 +1,8 @@
+{
+    "PORT": 4000,
+    "DB_DATABASE": "flowers",
+    "DB_PASSWORD": "RootMySql@3306",
+    "DB_USERNAME": "root",
+    "DB_HOST": "localhost",
+    "mySecretTokenKey": "mySecretTokenKey"
+}
